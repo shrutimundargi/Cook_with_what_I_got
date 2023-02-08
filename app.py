@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 import pandas as pd
+import numpy as np
 data = pd.read_csv("indian_food.csv")
 data = data.drop(columns=['flavor_profile','region','state', 'diet'])
 str_cols = list(data.columns)
@@ -20,22 +21,19 @@ data['ingredients'] = list(data['ingredients'])
 def easyA(x):
   available = []
   suggested = []
-  recommendation = pd.DataFrame(columns = ['recipe', 'ingredients', 'score'])
+  #recommendation = np.empty((0, 3))
   for i in range(0, len(data)):
     count = 0
     for j in x:
-      if j in data['ingredients'][i]:
-        count +=1
-        available.append(j)
-    if count >= 3:
-        series1=[data['name'][i]]
-        series = pd.DataFrame({'recipe': [data['name'][i]], 'ingredients': data['ingredients'][i], 'score': "{:.2f}".format((len(available))/(len(data['ingredients'][i]))*100)})
-        recommendation = recommendation.append(series)
-        suggested.append(data['name'][i])
-        print(series)
-        available.clear()
-    return series1
-
+        if j in data['ingredients'][i]:
+            count +=1
+            available.append(j)
+        if count >= 3:
+            series = pd.DataFrame({'recipe': [data['name'][i]], 'ingredients': data['ingredients'][i], 'score': "{:.2f}".format((len(available))/(len(data['ingredients'][i]))*100)})
+            recommendation = [data['name'][i],data['ingredients'][i],"{:.2f}".format((len(available))/(len(data['ingredients'][i]))*100)]
+            available.clear()
+    print(recommendation)
+    return recommendation
    
 
 
