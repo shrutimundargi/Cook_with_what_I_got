@@ -14,20 +14,10 @@
   <input type="text" id="fname" name="fname">
   <input type="submit" value="Submit">
 </form><br><br>
- <table border= "1px">
-  <tr>
-    <th padding= "15px">Name</th>
-    <th padding= "15px">Ingredients</th>
-    <th padding= "15px">Score</th>
-  </tr>
-  
-  <tr>
-    <td padding= "15px">{{res[0]}}</td>
-    <td padding= "15px">{{res[1]}}</td>
-    <td padding= "15px">{{res[2]}}</td>
-  </tr>
-
-</table> 
+ {% for table in tables %}
+    <h2>{{titles[loop.index]}}</h2>
+    {{ table|safe }}
+  {% endfor %}
 </center>
 
 </body>

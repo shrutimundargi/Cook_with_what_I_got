@@ -13,7 +13,22 @@
   <label for="fname">Add ingredients(seperate by comma):</label>
   <input type="text" id="fname" name="fname">
   <input type="submit" value="Submit">
-</form>{{res}}</center>
+</form>{{res}
+<table border= "1px">
+  <tr>
+    <th padding= "15px">Name</th>
+    <th padding= "15px">Ingredients</th>
+    <th padding= "15px">Score</th>
+  </tr>
+  {%for i in res%}
+  <tr>
+    <td padding>{{i.res[0]}}</td>
+    <td padding>{{i.res[1]}}</td>
+    <td padding>{{i.res[2]}}</td>
+  </tr>
+  {%endfor%}
+</table> 
+}</center>
 <br><br>
 
 </body>
